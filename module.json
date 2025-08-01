@@ -1,0 +1,42 @@
+{
+  "id": "sistema-daemon-wizard",
+  "title": "Sistema Daemon - Assistente de Criação",
+  "description": "Um assistente passo a passo para guiar na criação de personagens para o Sistema Daemon.",
+  "version": "0.1.0",
+  "authors": [
+    {
+      "name": "Mestre Arboreal",
+      "email": "",
+      "url": ""
+    }
+  ],
+  "compatibility": {
+    "minimum": "11",
+    "verified": "12"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "daemonrpg",
+        "type": "system",
+        "compatibility": {}
+      }
+    ]
+  },
+  "esmodules": [
+    "scripts/hero-daemon.js"
+  ],
+  "styles": [
+    "styles/style.css"
+  ],
+  "languages": [
+    {
+      "lang": "pt-BR",
+      "name": "Português (Brasil)",
+      "path": "lang/pt-BR.json"
+    }
+  ],
+  "url": "",
+  "manifest": "",
+  "download": ""
+}

@@ -1,0 +1,52 @@
+<div class="step-content step-4-aprimoramentos">
+    <h2 class="step-title">{{localize "DAEMON_WIZARD.Steps.Aprimoramentos"}}</h2>
+    <p class="step-description">
+        {{localize "DAEMON_WIZARD.Aprimoramentos.DescriptionManual"}}
+    </p>
+
+    <div class="points-tracker">
+        <h3>{{localize "DAEMON_WIZARD.Aprimoramentos.PointsTitle"}}</h3>
+        <div class="points-display {{#if (lt aprimoramentoPoints.remaining 0)}}overspent{{/if}}">
+            <span>{{aprimoramentoPoints.remaining}}</span> / {{aprimoramentoPoints.available}}
+        </div>
+        <small>Base: {{aprimoramentoPoints.base}} + Desvantagens: {{aprimoramentoPoints.fromDisadvantages}}</small>
+    </div>
+
+    <div class="aprimoramentos-container">
+        <!-- Coluna de Vantagens -->
+        <div class="aprimoramentos-list vantagens">
+            <h4>{{localize "DAEMON_WIZARD.Aprimoramentos.Vantagens"}}</h4>
+            <ul class="manual-list">
+                {{#each vantagens as |item index|}}
+                <li class="manual-item">
+                    <span>{{item.name}} ({{item.cost}} pts)</span>
+                    <a class="remove-item" data-index="{{index}}" data-type="vantagem" title="Remover"><i class="fas fa-trash"></i></a>
+                </li>
+                {{/each}}
+            </ul>
+            <div class="manual-add">
+                <input type="text" id="vantagem-name" placeholder="Nome da Vantagem">
+                <input type="number" id="vantagem-cost" placeholder="Custo" min="0">
+                <button type="button" class="add-aprimoramento" data-type="vantagem"><i class="fas fa-plus"></i> Adicionar</button>
+            </div>
+        </div>
+
+        <!-- Coluna de Desvantagens -->
+        <div class="aprimoramentos-list desvantagens">
+            <h4>{{localize "DAEMON_WIZARD.Aprimoramentos.Desvantagens"}}</h4>
+            <ul class="manual-list">
+                 {{#each desvantagens as |item index|}}
+                <li class="manual-item">
+                    <span>{{item.name}} ({{item.cost}} pts)</span>
+                    <a class="remove-item" data-index="{{index}}" data-type="desvantagem" title="Remover"><i class="fas fa-trash"></i></a>
+                </li>
+                {{/each}}
+            </ul>
+            <div class="manual-add">
+                <input type="text" id="desvantagem-name" placeholder="Nome da Desvantagem">
+                <input type="number" id="desvantagem-cost" placeholder="Custo" max="-1">
+                <button type="button" class="add-aprimoramento" data-type="desvantagem"><i class="fas fa-plus"></i> Adicionar</button>
+            </div>
+        </div>
+    </div>
+</div>

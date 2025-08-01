@@ -1,0 +1,21 @@
+<div class="step-content step-2-backstory">
+    <h2 class="step-title">{{localize "DAEMON_WIZARD.Steps.Backstory"}}</h2>
+    <p class="step-description">
+        {{localize "DAEMON_WIZARD.Backstory.Description"}}
+    </p>
+
+    <div class="form-group">
+        <label for="char-name">{{localize "DAEMON_WIZARD.Backstory.Name"}}</label>
+        <input type="text" id="char-name" name="name" value="{{wizardData.backstory.name}}" placeholder="Ex: Arion, o Bravo">
+    </div>
+
+    <div class="form-group">
+        <label for="char-age">{{localize "DAEMON_WIZARD.Backstory.Age"}}</label>
+        <input type="number" id="char-age" name="age" value="{{wizardData.backstory.age}}" placeholder="Ex: 25">
+    </div>
+
+    <div class="form-group">
+        <label for="char-bio">{{localize "DAEMON_WIZARD.Backstory.Bio"}}</label>
+        <textarea id="char-bio" name="biography" rows="8" placeholder="Descreva a aparência, a família, as motivações e os eventos marcantes da vida do seu personagem...">{{wizardData.backstory.biography}}</textarea>
+    </div>
+</div>

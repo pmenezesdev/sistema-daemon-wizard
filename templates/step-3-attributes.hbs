@@ -1,0 +1,23 @@
+<div class="step-content step-3-attributes">
+    <h2 class="step-title">{{localize "DAEMON_WIZARD.Steps.Attributes"}}</h2>
+    <p class="step-description">
+        {{localize "DAEMON_WIZARD.Attributes.Description"}}
+    </p>
+
+    <div class="points-tracker">
+        <h3>{{localize "DAEMON_WIZARD.Attributes.PointsTitle"}}</h3>
+        <div class="points-display {{#if (lt attributePoints.remaining 0)}}overspent{{/if}}">
+            <span>{{attributePoints.remaining}}</span> / {{attributePoints.total}}
+        </div>
+    </div>
+
+    <div class="attributes-grid">
+        {{!-- CORREÇÃO: A referência foi alterada de 'data.system.attributes' para 'actor.system.attributes', que é o caminho correto dos dados. --}}
+        {{#each actor.system.attributes as |attr key|}}
+        <div class="attribute-row form-group">
+            <label for="attr-{{key}}">{{localize (lookup ../config.DAEMON.attributes key)}}</label>
+            <input type="number" id="attr-{{key}}" name="{{key}}" value="{{lookup ../wizardData.attributes key}}" class="attribute-input">
+        </div>
+        {{/each}}
+    </div>
+</div>

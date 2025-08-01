@@ -1,0 +1,288 @@
+/* styles/style.css */
+
+/* ==========================================================================
+   Variáveis e Base
+ ========================================================================== */
+:root {
+    --background-color: #2e2e2e;
+    --sheet-background: #f1eadd;
+    --text-color-dark: #333;
+    --text-color-light: #e0e0e0;
+    --border-color: #a58f70;
+    --header-footer-bg: rgba(0, 0, 0, 0.2);
+    --button-bg: #4a4a4a;
+    --button-hover-bg: #6a6a6a;
+    --accent-color: #c8a252;
+    --points-overspent-color: #e62f2f;
+}
+
+/* ... (restante do CSS base que já criamos) ... */
+
+/* ==========================================================================
+   Layout Principal do Wizard
+ ========================================================================== */
+.daemon-hero-wizard .window-content {
+    padding: 0;
+    background: var(--background-color);
+    color: var(--text-color-light);
+}
+
+.daemon-hero-wizard form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.daemon-hero-wizard .wizard-header {
+    flex: 0 0 auto;
+    padding: 10px 15px;
+    border-bottom: 2px solid var(--border-color);
+    background: var(--header-footer-bg);
+    text-align: center;
+}
+
+.daemon-hero-wizard .wizard-header h1 {
+    margin: 0;
+    font-family: "Modesto Condensed", "Palatino Linotype", serif;
+    font-size: 1.8em;
+    color: var(--accent-color);
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.daemon-hero-wizard .sheet-body {
+    flex: 1 1 auto;
+    padding: 20px;
+    overflow-y: auto;
+    background: linear-gradient(rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0)), var(--background-color);
+}
+
+.daemon-hero-wizard .step-title {
+    font-family: "Modesto Condensed", "Palatino Linotype", serif;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: var(--accent-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+.daemon-hero-wizard .step-description {
+    font-style: italic;
+    color: #b0b0b0;
+    margin-bottom: 25px;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.daemon-hero-wizard .form-group {
+    margin-bottom: 20px;
+}
+
+.daemon-hero-wizard .form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+    color: var(--text-color-light);
+}
+
+.daemon-hero-wizard .form-group select,
+.daemon-hero-wizard .form-group input[type="text"],
+.daemon-hero-wizard .form-group input[type="number"],
+.daemon-hero-wizard .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px solid #555;
+    background-color: #3a3a3a;
+    color: var(--text-color-light);
+    font-size: 1em;
+}
+
+.daemon-hero-wizard .campaign-details {
+    margin-top: 25px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+.daemon-hero-wizard .campaign-details h3 {
+    margin-top: 0;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.daemon-hero-wizard .campaign-details p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.daemon-hero-wizard .campaign-details ul {
+    list-style-position: inside;
+    padding-left: 10px;
+}
+
+.daemon-hero-wizard .campaign-details li {
+    margin-bottom: 5px;
+}
+
+/* ==========================================================================
+   Estilos da Etapa 3: Atributos
+ ========================================================================== */
+.points-tracker {
+    text-align: center;
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    border: 1px solid #444;
+}
+
+.points-tracker h3 {
+    margin: 0 0 10px 0;
+    font-size: 1.1em;
+    color: #ccc;
+}
+
+.points-tracker .points-display {
+    font-size: 2em;
+    font-weight: bold;
+    color: var(--accent-color);
+    transition: color 0.3s ease;
+}
+
+.points-tracker .points-display.overspent {
+    color: var(--points-overspent-color);
+}
+
+.attributes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+}
+
+.attribute-row label {
+    text-align: center;
+    font-size: 1.2em;
+}
+
+.attribute-row input {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   Rodapé e Navegação
+ ========================================================================== */
+.daemon-hero-wizard .wizard-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    border-top: 2px solid var(--border-color);
+    background: var(--header-footer-bg);
+}
+
+.daemon-hero-wizard .wizard-footer .step-indicator {
+    font-style: italic;
+    color: #aaa;
+}
+
+.daemon-hero-wizard .wizard-footer button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #333;
+    background-color: var(--button-bg);
+    color: var(--text-color-light);
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.daemon-hero-wizard .wizard-footer button:hover:not(:disabled) {
+    background-color: var(--button-hover-bg);
+    box-shadow: 0 0 8px var(--accent-color);
+}
+
+.daemon-hero-wizard .wizard-footer button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+/* ... (todo o CSS anterior) ... */
+
+/* ==========================================================================
+   Estilos da Etapa 4: Aprimoramentos (Manual)
+ ========================================================================== */
+.aprimoramentos-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.aprimoramentos-list h4 {
+    text-align: center;
+    font-family: "Modesto Condensed", "Palatino Linotype", serif;
+    font-size: 1.3em;
+    color: #ccc;
+    border-bottom: 1px solid #555;
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+}
+
+.aprimoramentos-list .manual-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    min-height: 150px;
+    max-height: 250px;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 3px;
+    margin-bottom: 10px;
+}
+
+.manual-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+    margin-bottom: 5px;
+}
+
+.manual-item .remove-item {
+    color: #ff6868;
+    cursor: pointer;
+}
+
+.manual-add {
+    display: flex;
+    gap: 5px;
+}
+
+.manual-add input[type="text"] {
+    flex-grow: 1;
+}
+
+.manual-add input[type="number"] {
+    width: 80px;
+    flex-shrink: 0;
+}
+
+.manual-add button {
+    flex-shrink: 0;
+    padding: 0 15px;
+}
+
+/* ==========================================================================
+   Rodapé e Navegação
+ ========================================================================== */
+/* ... (restante do CSS do rodapé) ... */

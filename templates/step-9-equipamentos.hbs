@@ -1,0 +1,64 @@
+<div class="step-content step-9-equipamentos">
+    <h2 class="step-title">{{localize "DAEMON_WIZARD.Steps.Equipamentos"}}</h2>
+    <p class="step-description">
+        {{localize "DAEMON_WIZARD.Equipamentos.Description"}}
+    </p>
+
+    <div class="equipment-manager">
+        {{!-- LISTA DE EQUIPAMENTOS ADICIONADOS --}}
+        <div class="equipment-list">
+            <h4>Equipamentos Atuais</h4>
+            <ul>
+                {{#each wizardData.equipamentos as |item index|}}
+                <li class="manual-item">
+                    <span><i class="fas {{item.icon}}"></i> {{item.name}} ({{item.type}})</span>
+                    <a class="remove-item" data-index="{{index}}" title="Remover"><i class="fas fa-trash"></i></a>
+                </li>
+                {{/each}}
+                {{#unless wizardData.equipamentos.length}}
+                <li class="empty">Nenhum equipamento adicionado.</li>
+                {{/unless}}
+            </ul>
+        </div>
+
+        {{!-- PAINEL PARA ADICIONAR NOVOS EQUIPAMENTOS --}}
+        <div class="equipment-adder">
+            <h4>Adicionar Novo Equipamento</h4>
+            <div class="form-group">
+                <label>Tipo de Item</label>
+                <select id="equipment-type-select">
+                    <option value="item">Item Genérico</option>
+                    <option value="arma">Arma</option>
+                    <option value="armadura">Armadura</option>
+                </select>
+            </div>
+
+            {{!-- Formulário para Item Genérico --}}
+            <div class="equipment-form" id="form-item">
+                <input type="text" name="name" placeholder="Nome do Item">
+                <input type="number" name="quantity" value="1" min="1" placeholder="Qtd.">
+                <button type="button" class="add-equipment" data-type="item"><i class="fas fa-plus"></i> Adicionar Item</button>
+            </div>
+
+            {{!-- Formulário para Arma --}}
+            <div class="equipment-form" id="form-arma" style="display: none;">
+                <input type="text" name="name" placeholder="Nome da Arma">
+                <input type="text" name="damage" value="1d6" placeholder="Dano">
+                <select name="weaponType">
+                    <option value="corporal">Corporal</option>
+                    <option value="distancia">Distância</option>
+                </select>
+                <button type="button" class="add-equipment" data-type="arma"><i class="fas fa-plus"></i> Adicionar Arma</button>
+            </div>
+
+            {{!-- Formulário para Armadura --}}
+            <div class="equipment-form" id="form-armadura" style="display: none;">
+                <input type="text" name="name" placeholder="Nome da Armadura">
+                <input type="number" name="ip.cinetico" value="1" min="0" placeholder="IP Cinético">
+                <input type="number" name="penalties.dex" value="0" max="0" placeholder="Pen. DEX">
+                <input type="number" name="penalties.agi" value="0" max="0" placeholder="Pen. AGI">
+                <button type="button" class="add-equipment" data-type="armadura"><i class="fas fa-plus"></i> Adicionar Armadura</button>
+            </div>
+        </div>
+    </div>
+</div>

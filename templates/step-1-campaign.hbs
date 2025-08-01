@@ -1,0 +1,31 @@
+<div class="step-content step-1-campaign">
+    <h2 class="step-title">{{localize "DAEMON_WIZARD.Steps.Campaign"}}</h2>
+    <p class="step-description">
+        {{localize "DAEMON_WIZARD.Campaign.Description"}}
+    </p>
+
+    <div class="form-group">
+        <label for="campaign-type">{{localize "DAEMON_WIZARD.Steps.Campaign"}}</label>
+        <select name="campaignKey" id="campaign-type">
+            <option value="">{{localize "DAEMON_WIZARD.Campaign.Select"}}</option>
+            {{#each scenarios as |scenario key|}}
+            <option value="{{key}}">{{scenario.label}}</option>
+            {{/each}}
+        </select>
+    </div>
+
+    <div class="campaign-details">
+        {{#if selectedScenario}}
+            <h3>{{selectedScenario.label}}</h3>
+            <p>{{selectedScenario.description}}</p>
+            <hr>
+            <h4>Pontos Iniciais:</h4>
+            <ul>
+                <li><strong>Atributos:</strong> {{selectedScenario.points.attributes}} pontos</li>
+                <li><strong>Aprimoramentos:</strong> {{selectedScenario.points.aprimoramentos}} pontos</li>
+            </ul>
+        {{else}}
+            <p><i>Selecione uma campanha para ver os detalhes.</i></p>
+        {{/if}}
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="step-content step-6-pericias-combate">
+    <h2 class="step-title">{{localize "DAEMON_WIZARD.Steps.PericiasCombate"}}</h2>
+    <p class="step-description">
+        {{localize "DAEMON_WIZARD.PericiasCombate.Description"}}
+    </p>
+
+    <div class="points-tracker">
+        <h3>{{localize "DAEMON_WIZARD.Pericias.PointsTitle"}}</h3>
+        <div class="points-display {{#if (lt periciaPoints.remaining 0)}}overspent{{/if}}">
+            <span>{{periciaPoints.remaining}}</span> / {{periciaPoints.total}}
+        </div>
+    </div>
+
+    {{!-- Lista de perícias de combate do personagem --}}
+    <div class="character-pericias-list">
+        <div class="list-header">
+            <span class="pericia-name">Perícia</span>
+            <span class="pericia-attr">Atributo</span>
+            <span class="pericia-gasto">Pontos Gastos (Atk/Def)</span>
+            <span class="pericia-total">Valor Final</span>
+            <span class="pericia-actions">Ações</span>
+        </div>
+        <ul>
+            {{#each periciasCombate as |pericia index|}}
+            <li class="pericia-row">
+                <span class="pericia-name">{{pericia.name}}</span>
+                <span class="pericia-attr">{{#if pericia.attribute}}{{upcase pericia.attribute}}{{else}}N/A{{/if}}</span>
+                <div class="briga-inputs">
+                    <input class="pericia-gasto" type="number" data-index="{{index}}" data-field="gasto_atk" value="{{pericia.gasto_atk}}" min="0" placeholder="Atk">
+                    <input class="pericia-gasto" type="number" data-index="{{index}}" data-field="gasto_def" value="{{pericia.gasto_def}}" min="0" placeholder="Def">
+                </div>
+                <span class="pericia-total">{{pericia.total}}%</span>
+                <span class="pericia-actions">
+                    {{#unless (eq pericia.name "Briga")}}
+                    <a class="remove-pericia" data-index="{{index}}" data-type="combate"><i class="fas fa-trash"></i></a>
+                    {{/unless}}
+                </span>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+
+    {{!-- Seção para adicionar novas perícias de combate --}}
+    <div class="manual-add-pericia">
+        <h4>Adicionar Perícia de Combate</h4>
+        <input type="text" id="pericia-combate-name" placeholder="Nome da Perícia">
+        <select id="pericia-combate-attribute">
+            <option value="dex">Destreza (DEX)</option>
+            <option value="agi">Agilidade (AGI)</option>
+            <option value="fr">Força (FR)</option>
+        </select>
+        <button type="button" class="add-pericia-combate"><i class="fas fa-plus"></i> Adicionar</button>
+    </div>
+</div>

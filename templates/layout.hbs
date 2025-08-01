@@ -1,0 +1,28 @@
+<form autocomplete="off">
+    <header class="sheet-header wizard-header">
+        <h1>{{title}} - Etapa {{currentStep}} de {{totalSteps}}</h1>
+    </header>
+
+    <section class="sheet-body">
+        {{!-- O template da etapa atual será renderizado aqui --}}
+        {{> (lookup . 'stepTemplate') }}
+    </section>
+
+    <footer class="sheet-footer wizard-footer">
+        <button type="button" class="prev-step" {{#if (eq currentStep 1)}}disabled{{/if}}>
+            <i class="fas fa-arrow-left"></i> {{localize "DAEMON_WIZARD.Nav.Prev"}}
+        </button>
+        
+        <div class="step-indicator">Etapa {{currentStep}} / {{totalSteps}}</div>
+
+        {{#if (lt currentStep totalSteps)}}
+        <button type="button" class="next-step">
+            {{localize "DAEMON_WIZARD.Nav.Next"}} <i class="fas fa-arrow-right"></i>
+        </button>
+        {{else}}
+        <button type="submit" class="finish-wizard">
+            <i class="fas fa-check"></i> {{localize "DAEMON_WIZARD.Nav.Finish"}}
+        </button>
+        {{/if}}
+    </footer>
+</form>
