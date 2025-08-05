@@ -28,6 +28,7 @@
     "Aprimoramentos.PointsTitle": "Pontos de Aprimoramento",
     "Aprimoramentos.Vantagens": "Positivos",
     "Aprimoramentos.Desvantagens": "Negativos",
+    "Aprimoramentos.NegativeLimit": "Limite de Negativos",
     "Pericias.DescriptionManual": "Distribua os pontos de perícia para definir as habilidades do seu personagem. A perícia 'Briga' é automática. Adicione outras perícias manualmente, lembrando que o gasto mínimo em uma nova perícia é 10 pontos.",
     "Pericias.PointsTitle": "Pontos de Perícia",
     "PericiasCombate.Description": "Use seus pontos de perícia para aprimorar suas capacidades de combate. Lembre-se que cada perícia de combate tem valores de ataque e defesa separados.",
@@ -49,6 +50,14 @@
     "Extras.Label": "Poderes e Habilidades Especiais",
     "Nav.Next": "Próximo",
     "Nav.Prev": "Anterior",
-    "Nav.Finish": "Concluir Personagem"
+    "Nav.Finish": "Concluir Personagem",
+    "Settings": {
+      "AttributePoints": "Pontos iniciais de atributos",
+      "AttributePointsHint": "Total de pontos para distribuir nos atributos.",
+      "PositiveEnhancements": "Pontos de aprimoramentos positivos",
+      "PositiveEnhancementsHint": "Total de pontos disponíveis para aprimoramentos positivos.",
+      "NegativeEnhancements": "Limite de aprimoramentos negativos",
+      "NegativeEnhancementsHint": "Quantidade máxima de pontos que podem ser ganhos com aprimoramentos negativos."
+    }
   }
 }

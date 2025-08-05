@@ -98,10 +98,15 @@ class HeroDaemonWizard extends FormApplication {
     if (currentStep.id === 'campaign') {
         data.scenarios = DAEMON_WIZARD_SCENARIOS;
         data.selectedScenario = this.wizardData.campaignKey ? DAEMON_WIZARD_SCENARIOS[this.wizardData.campaignKey] : null;
+        data.configPoints = {
+            attributes: game.settings.get('sistema-daemon-wizard', 'attributePoints'),
+            aprimoramentosPositivos: game.settings.get('sistema-daemon-wizard', 'aprimoramentosPositivos'),
+            aprimoramentosNegativos: game.settings.get('sistema-daemon-wizard', 'aprimoramentosNegativos')
+        };
     }
-    
+
     if (currentStep.id === 'attributes') {
-        const totalPoints = this.wizardData.campaignKey ? DAEMON_WIZARD_SCENARIOS[this.wizardData.campaignKey].points.attributes : 80;
+        const totalPoints = game.settings.get('sistema-daemon-wizard', 'attributePoints');
         const spentPoints = Object.values(this.wizardData.attributes).reduce((sum, val) => sum + Number(val), 0);
         data.attributePoints = { total: totalPoints, spent: spentPoints, remaining: totalPoints - spentPoints };
     }
@@ -109,12 +114,21 @@ class HeroDaemonWizard extends FormApplication {
     if (currentStep.id === 'aprimoramentos') {
         data.positivos = this.wizardData.aprimoramentos.filter(a => a.cost >= 0);
         data.negativos = this.wizardData.aprimoramentos.filter(a => a.cost < 0);
-        const basePoints = this.wizardData.campaignKey ? DAEMON_WIZARD_SCENARIOS[this.wizardData.campaignKey].points.aprimoramentos : 5;
+        const basePos = game.settings.get('sistema-daemon-wizard', 'aprimoramentosPositivos');
+        const baseNeg = game.settings.get('sistema-daemon-wizard', 'aprimoramentosNegativos');
         const fromNegatives = data.negativos.reduce((sum, a) => sum + Math.abs(a.cost), 0);
         const spentOnPositivos = data.positivos.reduce((sum, a) => sum + a.cost, 0);
-        const available = basePoints + fromNegatives;
-        const remaining = available - spentOnPositivos;
-        data.aprimoramentoPoints = { base: basePoints, fromNegatives, available, spent: spentOnPositivos, remaining };
+        const gainedFromNeg = Math.min(fromNegatives, baseNeg);
+        const remainingPos = basePos + gainedFromNeg - spentOnPositivos;
+        const remainingNeg = baseNeg - fromNegatives;
+        data.aprimoramentoPoints = {
+            basePos,
+            baseNeg,
+            gainedFromNeg,
+            spentPos: spentOnPositivos,
+            remainingPos,
+            remainingNeg
+        };
     }
 
     if (currentStep.id === 'pericias') {
@@ -453,6 +467,33 @@ Hooks.once('init', async () => {
 
   Handlebars.registerHelper('upcase', function(str) {
       if (typeof str === 'string') { return str.toUpperCase(); } return str;
+  });
+
+  game.settings.register('sistema-daemon-wizard', 'attributePoints', {
+      name: game.i18n.localize('DAEMON_WIZARD.Settings.AttributePoints'),
+      hint: game.i18n.localize('DAEMON_WIZARD.Settings.AttributePointsHint'),
+      scope: 'world',
+      config: true,
+      type: Number,
+      default: 80
+  });
+
+  game.settings.register('sistema-daemon-wizard', 'aprimoramentosPositivos', {
+      name: game.i18n.localize('DAEMON_WIZARD.Settings.PositiveEnhancements'),
+      hint: game.i18n.localize('DAEMON_WIZARD.Settings.PositiveEnhancementsHint'),
+      scope: 'world',
+      config: true,
+      type: Number,
+      default: 5
+  });
+
+  game.settings.register('sistema-daemon-wizard', 'aprimoramentosNegativos', {
+      name: game.i18n.localize('DAEMON_WIZARD.Settings.NegativeEnhancements'),
+      hint: game.i18n.localize('DAEMON_WIZARD.Settings.NegativeEnhancementsHint'),
+      scope: 'world',
+      config: true,
+      type: Number,
+      default: 5
   });
 
   const templatePaths = [

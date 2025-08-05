@@ -6,10 +6,14 @@
 
     <div class="points-tracker">
         <h3>{{localize "DAEMON_WIZARD.Aprimoramentos.PointsTitle"}}</h3>
-        <div class="points-display {{#if (lt aprimoramentoPoints.remaining 0)}}overspent{{/if}}">
-            <span>{{aprimoramentoPoints.remaining}}</span>
+        <div class="points-display {{#if (lt aprimoramentoPoints.remainingPos 0)}}overspent{{/if}}">
+            <span>{{aprimoramentoPoints.remainingPos}}</span>
         </div>
-        <small>Base: {{aprimoramentoPoints.base}} + Negativos: {{aprimoramentoPoints.fromNegatives}}</small>
+        <small>{{localize "DAEMON_WIZARD.Aprimoramentos.Vantagens"}}: {{aprimoramentoPoints.basePos}} + {{localize "DAEMON_WIZARD.Aprimoramentos.Desvantagens"}}: {{aprimoramentoPoints.gainedFromNeg}}</small>
+        <div class="points-display {{#if (lt aprimoramentoPoints.remainingNeg 0)}}overspent{{/if}}">
+            <span>{{aprimoramentoPoints.remainingNeg}}</span>
+        </div>
+        <small>{{localize "DAEMON_WIZARD.Aprimoramentos.NegativeLimit"}}: {{aprimoramentoPoints.baseNeg}}</small>
     </div>
 
     <div class="aprimoramentos-container">
