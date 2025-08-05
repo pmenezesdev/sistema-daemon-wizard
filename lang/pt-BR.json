@@ -50,5 +50,13 @@
     "Nav.Next": "Próximo",
     "Nav.Prev": "Anterior",
     "Nav.Finish": "Concluir Personagem"
+  },
+  "Settings": {
+    "AttributePoints": "Pontos Iniciais de Atributos",
+    "AttributePointsHint": "Total de pontos para distribuir entre os atributos ao criar o personagem. 0 usa o valor do cenário.",
+    "PositiveAprimoramentos": "Pontos de Vantagens",
+    "PositiveAprimoramentosHint": "Pontos disponíveis para gastar em aprimoramentos positivos. 0 usa o valor do cenário.",
+    "NegativeAprimoramentos": "Limite de Desvantagens",
+    "NegativeAprimoramentosHint": "Quantidade máxima de pontos que podem ser obtidos com desvantagens. 0 para ilimitado."
   }
 }
