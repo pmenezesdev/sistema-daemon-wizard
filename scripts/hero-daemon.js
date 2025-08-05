@@ -107,14 +107,14 @@ class HeroDaemonWizard extends FormApplication {
     }
 
     if (currentStep.id === 'aprimoramentos') {
-        data.vantagens = this.wizardData.aprimoramentos.filter(a => a.cost >= 0);
-        data.desvantagens = this.wizardData.aprimoramentos.filter(a => a.cost < 0);
+        data.positivos = this.wizardData.aprimoramentos.filter(a => a.cost >= 0);
+        data.negativos = this.wizardData.aprimoramentos.filter(a => a.cost < 0);
         const basePoints = this.wizardData.campaignKey ? DAEMON_WIZARD_SCENARIOS[this.wizardData.campaignKey].points.aprimoramentos : 5;
-        const fromDisadvantages = data.desvantagens.reduce((sum, a) => sum + Math.abs(a.cost), 0);
-        const spentOnVantagens = data.vantagens.reduce((sum, a) => sum + a.cost, 0);
-        const available = basePoints + fromDisadvantages;
-        const remaining = available - spentOnVantagens;
-        data.aprimoramentoPoints = { base: basePoints, fromDisadvantages, available, spent: spentOnVantagens, remaining };
+        const fromNegatives = data.negativos.reduce((sum, a) => sum + Math.abs(a.cost), 0);
+        const spentOnPositivos = data.positivos.reduce((sum, a) => sum + a.cost, 0);
+        const available = basePoints + fromNegatives;
+        const remaining = available - spentOnPositivos;
+        data.aprimoramentoPoints = { base: basePoints, fromNegatives, available, spent: spentOnPositivos, remaining };
     }
 
     if (currentStep.id === 'pericias') {

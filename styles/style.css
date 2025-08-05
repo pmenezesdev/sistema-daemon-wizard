@@ -1,35 +1,41 @@
 /* ==========================================================================
-   Novo Estilo para o Assistente Daemon (v2.1 - Responsivo Aprimorado)
-   Foco: Moderno, limpo, legível e adaptável a qualquer ecrã.
+   Assistente de Criação de Personagem - Sistema Daemon
+   v2.2 - Final e Organizado
  ========================================================================== */
 
-/* === VARIÁVEIS DE COR E FONTE === */
+/* ==========================================================================
+   1. Variáveis Globais e Fundações
+ ========================================================================== */
 :root {
+    /* -- Tipografia -- */
     --font-primary: "Signika", sans-serif;
     --font-header: "Modesto Condensed", "Palatino Linotype", serif;
     
-    --color-bg-window: #1e1e1e;
-    --color-bg-content: #2a2a2a;
-    --color-bg-input: #333333;
-    --color-border-light: #444444;
-    --color-border-accent: #b8955b;
+    /* -- Paleta de Cores -- */
+    --color-bg-window: #1e1e1e;      /* Fundo principal da janela */
+    --color-bg-content: #2a2a2a;     /* Fundo para áreas de conteúdo e itens de lista */
+    --color-bg-input: #333333;       /* Fundo para campos de formulário */
+    --color-border-light: #444444;   /* Bordas subtis */
+    --color-border-accent: #b8955b;  /* Dourado envelhecido para destaque */
     
-    --color-text-light: #e0e0e0;
-    --color-text-muted: #999999;
-    --color-text-header: #d4b888;
-    --color-text-accent: #f0c674;
+    --color-text-light: #e0e0e0;     /* Texto principal */
+    --color-text-muted: #999999;     /* Texto secundário, descrições */
+    --color-text-header: #d4b888;    /* Cor para títulos principais */
+    --color-text-accent: #f0c674;    /* Cor para valores importantes (pontos) */
     
-    --color-negative: #e57373;
-    --color-positive: #81c784;
+    --color-negative: #e57373;       /* Vermelho para pontos negativos e botões de apagar */
+    --color-positive: #81c784;       /* Verde sutil */
 }
 
-/* === LAYOUT GERAL === */
+/* ==========================================================================
+   2. Layout Principal do Assistente (Cabeçalho, Corpo, Rodapé)
+ ========================================================================== */
 .daemon-hero-wizard .window-content {
     background: var(--color-bg-window);
     padding: 0;
     font-family: var(--font-primary);
     color: var(--color-text-light);
-    font-size: 14px; /* Base font size for responsiveness */
+    font-size: 14px;
 }
 
 .daemon-hero-wizard form {
@@ -39,7 +45,7 @@
 }
 
 .daemon-hero-wizard .wizard-header {
-    padding: 12px 20px;
+    padding: 10px 15px;
     border-bottom: 1px solid var(--color-border-accent);
     background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0));
     text-align: center;
@@ -47,7 +53,7 @@
 
 .daemon-hero-wizard .wizard-header h1 {
     font-family: var(--font-header);
-    font-size: 2em;
+    font-size: 1.6em;
     color: var(--color-text-header);
     margin: 0;
     text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
@@ -55,7 +61,7 @@
 
 .daemon-hero-wizard .sheet-body {
     flex-grow: 1;
-    padding: 15px;
+    padding: 10px;
     overflow-y: auto;
 }
 
@@ -63,39 +69,68 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 15px;
+    padding: 8px 12px;
     border-top: 1px solid var(--color-border-light);
     background: var(--color-bg-content);
     flex-wrap: wrap;
     gap: 10px;
 }
 
-/* === ELEMENTOS COMUNS === */
+/* Media queries para layout principal */
+@media screen and (min-width: 576px) {
+    .daemon-hero-wizard .wizard-header {
+        padding: 12px 20px;
+    }
+    
+    .daemon-hero-wizard .wizard-header h1 {
+        font-size: 1.8em;
+    }
+    
+    .daemon-hero-wizard .sheet-body {
+        padding: 15px;
+    }
+    
+    .daemon-hero-wizard .wizard-footer {
+        padding: 10px 15px;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .daemon-hero-wizard .wizard-header h1 {
+        font-size: 2em;
+    }
+}
+
+/* ==========================================================================
+   3. Componentes Comuns (Títulos, Botões, Formulários)
+ ========================================================================== */
 .daemon-hero-wizard .step-title {
     font-family: var(--font-header);
-    font-size: 1.8em;
+    font-size: 1.5em;
     color: var(--color-text-header);
     border-bottom: 1px solid var(--color-border-light);
-    padding-bottom: 8px;
-    margin: 0 0 15px 0;
+    padding-bottom: 6px;
+    margin: 0 0 12px 0;
 }
 
 .daemon-hero-wizard .step-description {
     font-style: italic;
     color: var(--color-text-muted);
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     text-align: center;
-    line-height: 1.5;
+    line-height: 1.4;
+    font-size: 0.95em;
 }
 
 .daemon-hero-wizard .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .daemon-hero-wizard .form-group label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
     font-weight: bold;
+    font-size: 0.95em;
 }
 
 .daemon-hero-wizard input[type="text"],
@@ -103,17 +138,18 @@
 .daemon-hero-wizard select,
 .daemon-hero-wizard textarea {
     width: 100%;
-    padding: 8px 10px;
+    padding: 7px 10px;
     background: var(--color-bg-input);
     border: 1px solid var(--color-border-light);
     border-radius: 4px;
     color: var(--color-text-light);
     font-family: var(--font-primary);
-    box-sizing: border-box; /* Essencial para um bom layout */
+    box-sizing: border-box;
+    font-size: 0.95em;
 }
 
 .daemon-hero-wizard button {
-    padding: 8px 15px;
+    padding: 7px 12px;
     border: 1px solid var(--color-border-accent);
     background: transparent;
     color: var(--color-border-accent);
@@ -121,6 +157,7 @@
     cursor: pointer;
     transition: background-color 0.2s, color 0.2s;
     white-space: nowrap;
+    font-size: 0.95em;
 }
 
 .daemon-hero-wizard button:hover:not(:disabled) {
@@ -135,6 +172,43 @@
     color: var(--color-text-muted);
 }
 
+/* Media queries para componentes comuns */
+@media screen and (min-width: 576px) {
+    .daemon-hero-wizard .step-title {
+        font-size: 1.8em;
+        padding-bottom: 8px;
+        margin: 0 0 15px 0;
+    }
+    
+    .daemon-hero-wizard .step-description {
+        margin-bottom: 25px;
+        line-height: 1.5;
+        font-size: 1em;
+    }
+    
+    .daemon-hero-wizard .form-group {
+        margin-bottom: 15px;
+    }
+    
+    .daemon-hero-wizard .form-group label {
+        margin-bottom: 5px;
+        font-size: 1em;
+    }
+    
+    .daemon-hero-wizard input[type="text"],
+    .daemon-hero-wizard input[type="number"],
+    .daemon-hero-wizard select,
+    .daemon-hero-wizard textarea {
+        padding: 8px 10px;
+        font-size: 1em;
+    }
+    
+    .daemon-hero-wizard button {
+        padding: 8px 15px;
+        font-size: 1em;
+    }
+}
+
 .daemon-hero-wizard .wizard-footer .step-indicator {
     color: var(--color-text-muted);
     order: 2;
@@ -145,8 +219,6 @@
 .daemon-hero-wizard .wizard-footer .next-step,
 .daemon-hero-wizard .wizard-footer .finish-wizard { order: 3; }
 
-
-/* === RASTREADOR DE PONTOS === */
 .points-tracker {
     text-align: center;
     margin-bottom: 25px;
@@ -160,51 +232,183 @@
 .points-tracker .points-display.overspent { color: var(--color-negative); }
 .points-tracker small { color: var(--color-text-muted); }
 
-/* === ESTILOS POR ETAPA === */
+/* ==========================================================================
+   4. Estilos Específicos por Etapa
+ ========================================================================== */
 
-/* Etapa 1: Campanha */
+/* --- Etapa 1: Campanha --- */
 .campaign-details { margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 4px; }
 
-/* Etapa 3: Atributos */
-.attributes-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; }
-.attribute-row input { text-align: center; font-size: 1.5em; }
-.attribute-row label { text-align: center; }
+/* --- Etapa 3: Atributos --- */
+.attributes-grid { 
+    display: grid; 
+    grid-template-columns: 1fr; 
+    gap: 15px; 
+}
+.attribute-row input { 
+    text-align: center; 
+    font-size: 1.3em; 
+    padding: 10px 5px; 
+}
+.attribute-row label { 
+    text-align: center; 
+    margin-bottom: 8px; 
+    display: block; 
+}
 
-/* Etapa 4: Aprimoramentos */
-.aprimoramentos-container { display: grid; grid-template-columns: 1fr; gap: 20px; } /* Empilha por defeito */
+/* Media queries para atributos */
+@media screen and (min-width: 576px) {
+    .attribute-row input { 
+        font-size: 1.5em; 
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .attributes-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .attributes-grid { 
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); 
+    }
+}
+
+/* --- Etapa 4: Aprimoramentos --- */
+.aprimoramentos-container { display: grid; grid-template-columns: 1fr; gap: 20px; }
 .aprimoramentos-list h4 { text-align: center; margin-bottom: 10px; }
-.aprimoramentos-list .manual-list { list-style: none; padding: 10px; margin: 0 0 10px 0; background: rgba(0,0,0,0.2); border-radius: 4px; min-height: 150px; }
-.manual-item { display: flex; justify-content: space-between; align-items: center; padding: 8px; background: var(--color-bg-input); border-radius: 3px; margin-bottom: 5px; }
-.manual-item .remove-item { color: var(--color-negative); cursor: pointer; }
-.manual-add { display: flex; flex-wrap: wrap; gap: 5px; }
-.manual-add input[type="text"] { flex-grow: 1; min-width: 150px; }
-.manual-add input[type="number"] { width: 80px; flex-shrink: 0; }
-.manual-add button { flex-grow: 1; }
+.aprimoramentos-list .manual-list { 
+    list-style: none; 
+    padding: 10px; 
+    margin: 0 0 10px 0; 
+    background: rgba(0,0,0,0.2); 
+    border-radius: 4px; 
+    min-height: 150px; 
+    max-height: 250px; 
+    overflow-y: auto; 
+}
+.manual-item { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 8px; 
+    background: var(--color-bg-input); 
+    border-radius: 3px; 
+    margin-bottom: 5px; 
+    word-break: break-word; 
+}
+.manual-item span { 
+    padding-right: 10px; 
+}
+.manual-item .remove-item { 
+    color: var(--color-negative); 
+    cursor: pointer; 
+    flex-shrink: 0; 
+}
+.manual-add { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+}
+.manual-add input[type="text"] { 
+    width: 100%; 
+}
+.manual-add input[type="number"] { 
+    width: 100%; 
+}
+.manual-add button { 
+    width: 100%; 
+}
 
-/* Etapa 5 & 6: Perícias (REFORMULADO) */
+/* Media queries para responsividade dos aprimoramentos */
+@media screen and (min-width: 768px) {
+    .aprimoramentos-container { 
+        grid-template-columns: 1fr 1fr; 
+    }
+    
+    .manual-add { 
+        flex-direction: row; 
+        flex-wrap: wrap; 
+    }
+    
+    .manual-add input[type="text"] { 
+        flex-grow: 1; 
+        min-width: 150px; 
+        width: auto; 
+    }
+    
+    .manual-add input[type="number"] { 
+        width: 80px; 
+    }
+    
+    .manual-add button { 
+        width: auto; 
+    }
+}
+
+/* --- Etapa 5 & 6: Perícias --- */
 .character-pericias-list .list-header { display: none; }
-.character-pericias-list ul { list-style: none; padding: 0; margin: 0 0 20px 0; max-height: 220px; overflow-y: auto; }
+.character-pericias-list ul { list-style: none; padding: 0; margin: 0 0 20px 0; max-height: 300px; overflow-y: auto; }
 .character-pericias-list .pericia-row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 2fr auto;
+    grid-template-areas: "name total" "attr attr" "gasto actions";
     gap: 5px 15px;
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 4px;
     background-color: var(--color-bg-content);
+    word-break: break-word;
 }
-.pericia-row .pericia-name { flex-basis: 100%; font-weight: bold; font-size: 1.1em; }
-.pericia-row .pericia-attr { flex-basis: 100%; color: var(--color-text-muted); font-style: italic; }
-.pericia-row .pericia-gasto-container { flex-grow: 1; display: flex; flex-direction: column; }
-.pericia-row .pericia-gasto-container label { font-size: 0.8em; color: var(--color-text-muted); margin-bottom: 2px; }
-.pericia-row .pericia-total-container { text-align: center; }
-.pericia-row .pericia-total-container .pericia-total { font-size: 1.5em; color: var(--color-text-accent); font-weight: bold; }
-.pericia-row .pericia-actions { margin-left: auto; }
+.pericia-row .pericia-name { grid-area: name; text-align: left; font-weight: bold; font-size: 1.1em; }
+.pericia-row .pericia-attr { grid-area: attr; text-align: left; font-style: italic; color: var(--color-text-muted); }
+.pericia-row .pericia-gasto-container, .pericia-row .briga-inputs { grid-area: gasto; width: 100%; }
+.pericia-row .pericia-total { grid-area: total; text-align: right; font-size: 1.2em; color: var(--color-text-accent); font-weight: bold; }
+.pericia-row .pericia-actions { grid-area: actions; text-align: right; align-self: center; }
 
 .character-pericias-list .pericia-gasto { text-align: center; padding: 5px; background: var(--color-bg-input); border: 1px solid var(--color-border-light); border-radius: 3px; color: var(--color-text-light); width: 100%; }
-.character-pericias-list .briga-inputs { display: flex; gap: 5px; }
+.character-pericias-list .briga-inputs { display: flex; gap: 5px; flex-direction: column; }
 .character-pericias-list .remove-pericia { color: var(--color-negative); cursor: pointer; font-size: 1.2em; }
+
+/* Media queries para responsividade das perícias */
+@media screen and (min-width: 768px) {
+    .character-pericias-list .pericia-row {
+        grid-template-areas: "name attr gasto total actions";
+        grid-template-columns: 2fr 1fr 1fr 1fr auto;
+        padding: 8px;
+        margin-bottom: 5px;
+        gap: 10px;
+    }
+    
+    .character-pericias-list .briga-inputs {
+        flex-direction: row;
+    }
+    
+    .pericia-manual-form {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .pericia-manual-form input[type="text"] {
+        flex-grow: 1;
+        min-width: 150px;
+    }
+    
+    .pericia-manual-form select {
+        width: 100px;
+    }
+    
+    .pericia-manual-form input[type="number"] {
+        width: 80px;
+    }
+    
+    .pericia-manual-form button {
+        width: auto;
+    }
+}
 
 .manual-add-pericia {
     margin-top: 15px; padding: 15px; border-top: 1px solid var(--color-border-light);
@@ -213,7 +417,7 @@
 }
 .manual-add-pericia h4 { width: 100%; margin: 0 0 10px 0; text-align: center; }
 
-/* Etapa 7: PVs e IP */
+/* --- Etapa 7 & 8: Resumos (PVs, PH) --- */
 .summary-grid { display: grid; grid-template-columns: 1fr; gap: 15px; text-align: center; margin: 30px 0; }
 .summary-item { padding: 20px; background-color: var(--color-bg-content); border-radius: 5px; }
 .summary-item h4 { margin: 0 0 10px 0; font-family: var(--font-header); font-size: 1.3em; color: var(--color-text-muted); }
@@ -221,16 +425,121 @@
 .summary-item small { color: var(--color-text-muted); }
 .next-step-info { margin-top: 40px; padding-top: 20px; border-top: 1px dashed var(--color-border-light); }
 
+/* --- Etapa 9: Equipamentos --- */
+.equipment-manager { display: grid; grid-template-columns: 1fr; gap: 20px; }
+.equipment-list ul { list-style: none; padding: 10px; margin: 0; background: rgba(0,0,0,0.2); border-radius: 4px; min-height: 200px; max-height: 300px; overflow-y: auto; }
+.equipment-list .empty { text-align: center; color: var(--color-text-muted); padding: 20px; }
+.equipment-list h4, .equipment-adder h4 { text-align: center; margin-bottom: 10px; }
+.equipment-adder { padding: 15px; background: var(--color-bg-content); border-radius: 4px; }
+.equipment-form { display: flex; flex-wrap: wrap; gap: 10px; }
+.equipment-form input, .equipment-form select { flex-grow: 1; }
+.equipment-form button { width: 100%; }
 
-/* === MEDIA QUERIES PARA RESPONSIVIDADE === */
-@media (min-width: 600px) {
-    .daemon-hero-wizard .wizard-footer { flex-wrap: nowrap; }
-    .daemon-hero-wizard .wizard-footer .step-indicator { order: 0; flex-basis: auto; }
 
-    .aprimoramentos-container { grid-template-columns: 1fr 1fr; }
-    .manual-add button { flex-grow: 0; }
+/* ==========================================================================
+   5. Media Queries para Responsividade
+ ========================================================================== */
 
-    /* Layout de Tabela para Perícias em ecrãs maiores */
+/* Estilos base para dispositivos móveis (mobile-first) */
+.daemon-hero-wizard {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.daemon-hero-wizard .wizard-header h1 {
+    font-size: 1.6em;
+}
+
+.daemon-hero-wizard .step-title {
+    font-size: 1.5em;
+}
+
+.daemon-hero-wizard .wizard-footer {
+    flex-direction: column;
+    gap: 10px;
+}
+
+.daemon-hero-wizard .wizard-footer button {
+    width: 100%;
+}
+
+.points-tracker .points-display {
+    font-size: 1.8em;
+}
+
+.manual-add {
+    flex-direction: column;
+}
+
+.manual-add input, .manual-add button {
+    width: 100%;
+}
+
+.character-pericias-list ul {
+    max-height: 300px;
+}
+
+/* Tablets (576px e acima) */
+@media (min-width: 576px) {
+    .daemon-hero-wizard .wizard-header h1 {
+        font-size: 1.8em;
+    }
+    
+    .daemon-hero-wizard .wizard-footer {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    
+    .daemon-hero-wizard .wizard-footer button {
+        width: auto;
+    }
+    
+    .daemon-hero-wizard .wizard-footer .step-indicator {
+        order: 2;
+    }
+    
+    .manual-add {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .manual-add input {
+        width: auto;
+        flex-grow: 1;
+    }
+    
+    .manual-add button {
+        width: auto;
+    }
+}
+
+/* Tablets maiores e desktops (768px e acima) */
+@media (min-width: 768px) {
+    .daemon-hero-wizard .wizard-header h1 {
+        font-size: 2em;
+    }
+    
+    .daemon-hero-wizard .step-title {
+        font-size: 1.8em;
+    }
+    
+    .daemon-hero-wizard .wizard-footer { 
+        flex-wrap: nowrap; 
+    }
+    
+    .daemon-hero-wizard .wizard-footer .step-indicator { 
+        order: 0; 
+        flex-basis: auto; 
+    }
+
+    .aprimoramentos-container { 
+        grid-template-columns: 1fr 1fr; 
+    }
+    
+    .manual-add button { 
+        flex-grow: 0; 
+    }
+
     .character-pericias-list .list-header {
         display: grid;
         grid-template-columns: minmax(0, 3fr) 1.5fr 2fr 1.5fr auto;
@@ -240,88 +549,56 @@
         border-bottom: 1px solid var(--color-border-light);
         text-align: center;
     }
-    .character-pericias-list .list-header .pericia-name { text-align: left; }
+    
+    .character-pericias-list .list-header .pericia-name { 
+        text-align: left; 
+    }
     
     .character-pericias-list .pericia-row {
         display: grid;
         grid-template-columns: minmax(0, 3fr) 1.5fr 2fr 1.5fr auto;
-        padding: 5px 8px;
+        grid-template-areas: none;
+        padding: 8px;
         margin-bottom: 2px;
         background-color: transparent;
     }
-    .pericia-row:nth-child(odd) { background-color: rgba(0,0,0,0.2); }
-
-    .pericia-row .pericia-name { flex-basis: auto; font-size: 1em; }
-    .pericia-row .pericia-attr { flex-basis: auto; }
-    .pericia-row .pericia-gasto-container { flex-grow: 0; }
-    .pericia-row .pericia-total-container { text-align: center; }
-    .pericia-row .pericia-total-container .pericia-total { font-size: 1.1em; }
+    
+    .pericia-row:nth-child(odd) { 
+        background-color: rgba(0,0,0,0.2); 
+    }
 
     .manual-add-pericia {
         display: grid;
         grid-template-columns: 2fr 1.5fr 1fr auto;
+        gap: 10px;
     }
-    .summary-grid { grid-template-columns: repeat(3, 1fr); }
+    
+    .summary-grid { 
+        grid-template-columns: repeat(3, 1fr); 
+    }
+
+    .equipment-manager { 
+        grid-template-columns: 1fr 1fr; 
+    }
+    
+    .equipment-form button { 
+        width: auto; 
+    }
 }
 
-/* ... (todo o CSS anterior) ... */
-
-/* === ESTILOS POR ETAPA === */
-/* ... (outros estilos de etapa) ... */
-
-/* Etapa 9: Equipamentos (REFORMULADO) */
-.equipment-manager {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-}
-
-.equipment-list ul {
-    list-style: none;
-    padding: 10px;
-    margin: 0;
-    background: rgba(0,0,0,0.2);
-    border-radius: 4px;
-    min-height: 200px;
-    max-height: 300px;
-    overflow-y: auto;
-}
-.equipment-list .empty {
-    text-align: center;
-    color: var(--color-text-muted);
-    padding: 20px;
-}
-.equipment-list h4, .equipment-adder h4 {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-.equipment-adder {
-    padding: 15px;
-    background: var(--color-bg-content);
-    border-radius: 4px;
-}
-
-.equipment-form {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-.equipment-form input, .equipment-form select {
-    flex-grow: 1;
-}
-.equipment-form button {
-    width: 100%;
-}
-
-/* === MEDIA QUERIES === */
-@media (min-width: 700px) {
+/* Desktops grandes (992px e acima) */
+@media (min-width: 992px) {
+    .daemon-hero-wizard {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    .attributes-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
     .equipment-manager {
         grid-template-columns: 1fr 1fr;
-    }
-    .equipment-form button {
-        width: auto;
+        gap: 30px;
     }
 }
-
-/* ... (resto do CSS) ... */
