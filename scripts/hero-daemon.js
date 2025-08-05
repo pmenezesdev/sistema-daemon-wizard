@@ -1,6 +1,7 @@
 // scripts/hero-daemon.js
 
 import { DAEMON_WIZARD_SCENARIOS } from "./utils/scenarioRules.js";
+import { registerSettings } from "./settings.js";
 
 class HeroDaemonWizard extends FormApplication {
   constructor(actor, options = {}) {
@@ -101,7 +102,9 @@ class HeroDaemonWizard extends FormApplication {
     }
     
     if (currentStep.id === 'attributes') {
-        const totalPoints = this.wizardData.campaignKey ? DAEMON_WIZARD_SCENARIOS[this.wizardData.campaignKey].points.attributes : 80;
+        const configPoints = game.settings.get('sistema-daemon-wizard', 'attributePoints');
+        const scenarioPoints = this.wizardData.campaignKey ? DAEMON_WIZARD_SCENARIOS[this.wizardData.campaignKey].points.attributes : 80;
+        const totalPoints = configPoints > 0 ? configPoints : scenarioPoints;
         const spentPoints = Object.values(this.wizardData.attributes).reduce((sum, val) => sum + Number(val), 0);
         data.attributePoints = { total: totalPoints, spent: spentPoints, remaining: totalPoints - spentPoints };
     }
@@ -109,12 +112,18 @@ class HeroDaemonWizard extends FormApplication {
     if (currentStep.id === 'aprimoramentos') {
         data.vantagens = this.wizardData.aprimoramentos.filter(a => a.cost >= 0);
         data.desvantagens = this.wizardData.aprimoramentos.filter(a => a.cost < 0);
-        const basePoints = this.wizardData.campaignKey ? DAEMON_WIZARD_SCENARIOS[this.wizardData.campaignKey].points.aprimoramentos : 5;
-        const fromDisadvantages = data.desvantagens.reduce((sum, a) => sum + Math.abs(a.cost), 0);
+        const configBase = game.settings.get('sistema-daemon-wizard', 'aprimoramentoPositivePoints');
+        const scenarioBase = this.wizardData.campaignKey ? DAEMON_WIZARD_SCENARIOS[this.wizardData.campaignKey].points.aprimoramentos : 5;
+        const basePoints = configBase > 0 ? configBase : scenarioBase;
+        const maxNegSetting = game.settings.get('sistema-daemon-wizard', 'aprimoramentoNegativePoints');
+        const maxNegative = maxNegSetting > 0 ? maxNegSetting : Infinity;
+        const rawFromDisadvantages = data.desvantagens.reduce((sum, a) => sum + Math.abs(a.cost), 0);
+        const fromDisadvantages = Math.min(rawFromDisadvantages, maxNegative);
         const spentOnVantagens = data.vantagens.reduce((sum, a) => sum + a.cost, 0);
         const available = basePoints + fromDisadvantages;
         const remaining = available - spentOnVantagens;
-        data.aprimoramentoPoints = { base: basePoints, fromDisadvantages, available, spent: spentOnVantagens, remaining };
+        const maxDisadvantagesDisplay = maxNegative === Infinity ? "∞" : maxNegative;
+        data.aprimoramentoPoints = { base: basePoints, fromDisadvantages, available, spent: spentOnVantagens, remaining, maxDisadvantages: maxDisadvantagesDisplay };
     }
 
     if (currentStep.id === 'pericias') {
@@ -450,6 +459,8 @@ class HeroDaemonWizard extends FormApplication {
 
 Hooks.once('init', async () => {
   console.log('Sistema Daemon Wizard | Inicializando...');
+
+  registerSettings();
 
   Handlebars.registerHelper('upcase', function(str) {
       if (typeof str === 'string') { return str.toUpperCase(); } return str;
