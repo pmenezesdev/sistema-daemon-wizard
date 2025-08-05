@@ -5,7 +5,7 @@
     "ButtonLabel": "Assistente",
     "WrongSystem": "O Assistente de Criação só é compatível com o sistema daemonrpg.",
     "Steps": {
-      "Campaign": "Campanha",
+      "Intro": "Introdução",
       "Backstory": "História do Personagem",
       "Attributes": "Atributos",
       "Aprimoramentos": "Aprimoramentos",
@@ -16,8 +16,7 @@
       "Equipamentos": "Equipamentos e Posses",
       "Extras": "Extras e Poderes"
     },
-    "Campaign.Select": "-- Selecione um Cenário --",
-    "Campaign.Description": "Selecione o tipo de campanha que você irá jogar. Esta escolha definirá os pontos iniciais de atributos, aprimoramentos, perícias disponíveis e outras regras especiais.",
+    "Intro.Description": "Bem-vindo ao Assistente de Criação. Avance pelas etapas para definir história, atributos, aprimoramentos e muito mais para o seu personagem.",
     "Backstory.Description": "Defina os detalhes fundamentais do seu personagem. Quem ele é? De onde ele vem? O que o motiva?",
     "Backstory.Name": "Nome do Personagem",
     "Backstory.Age": "Idade",

@@ -1,14 +1,11 @@
 // scripts/hero-daemon.js
 
-import { DAEMON_WIZARD_SCENARIOS } from "./utils/scenarioRules.js";
-
 class HeroDaemonWizard extends FormApplication {
   constructor(actor, options = {}) {
     super(actor, options);
     this.actor = actor;
 
     this.wizardData = {
-      campaignKey: null,
       backstory: {
         name: this.actor.name === "Novo Personagem" ? "" : this.actor.name,
         age: this.actor.system.details.age.value || 30,
@@ -24,7 +21,7 @@ class HeroDaemonWizard extends FormApplication {
     this._loadInitialData();
 
     this.steps = [
-      { id: "campaign", title: game.i18n.localize("DAEMON_WIZARD.Steps.Campaign") },
+      { id: "intro", title: game.i18n.localize("DAEMON_WIZARD.Steps.Intro") },
       { id: "backstory", title: game.i18n.localize("DAEMON_WIZARD.Steps.Backstory") },
       { id: "attributes", title: game.i18n.localize("DAEMON_WIZARD.Steps.Attributes") },
       { id: "aprimoramentos", title: game.i18n.localize("DAEMON_WIZARD.Steps.Aprimoramentos") },
@@ -94,16 +91,6 @@ class HeroDaemonWizard extends FormApplication {
     data.totalSteps = this.steps.length;
     data.stepTitle = currentStep.title;
     data.config = CONFIG;
-
-    if (currentStep.id === 'campaign') {
-        data.scenarios = DAEMON_WIZARD_SCENARIOS;
-        data.selectedScenario = this.wizardData.campaignKey ? DAEMON_WIZARD_SCENARIOS[this.wizardData.campaignKey] : null;
-        data.configPoints = {
-            attributes: game.settings.get('sistema-daemon-wizard', 'attributePoints'),
-            aprimoramentosPositivos: game.settings.get('sistema-daemon-wizard', 'aprimoramentosPositivos'),
-            aprimoramentosNegativos: game.settings.get('sistema-daemon-wizard', 'aprimoramentosNegativos')
-        };
-    }
 
     if (currentStep.id === 'attributes') {
         const totalPoints = game.settings.get('sistema-daemon-wizard', 'attributePoints');
@@ -262,9 +249,6 @@ class HeroDaemonWizard extends FormApplication {
 
     const currentStepId = this.steps[this.currentStepIndex].id;
 
-    if (currentStepId === 'campaign') {
-        html.find('#campaign-type').on('change', this._onCampaignChange.bind(this));
-    }
     if (currentStepId === 'backstory') {
         html.find('input, textarea').on('change', this._onBackstoryChange.bind(this));
     }
@@ -294,8 +278,6 @@ class HeroDaemonWizard extends FormApplication {
         html.find('#char-extras').on('change', event => { this.wizardData.extras = event.currentTarget.value; });
     }
   }
-  
-  _onCampaignChange(event) { this.wizardData.campaignKey = event.currentTarget.value; this.render(); }
   
   _onBackstoryChange(event) { this.wizardData.backstory[event.currentTarget.name] = event.currentTarget.value; }
   
@@ -440,11 +422,6 @@ class HeroDaemonWizard extends FormApplication {
 
   _onNextStep(event) {
     event.preventDefault();
-    const currentStepId = this.steps[this.currentStepIndex].id;
-    if (currentStepId === 'campaign' && !this.wizardData.campaignKey) {
-        ui.notifications.warn("Por favor, selecione uma campanha antes de prosseguir.");
-        return;
-    }
     if (this.currentStepIndex < this.steps.length - 1) {
       this.currentStepIndex++;
       this.render(true);
@@ -497,7 +474,7 @@ Hooks.once('init', async () => {
   });
 
   const templatePaths = [
-    'modules/sistema-daemon-wizard/templates/step-1-campaign.hbs',
+    'modules/sistema-daemon-wizard/templates/step-1-intro.hbs',
     'modules/sistema-daemon-wizard/templates/step-2-backstory.hbs',
     'modules/sistema-daemon-wizard/templates/step-3-attributes.hbs',
     'modules/sistema-daemon-wizard/templates/step-4-aprimoramentos.hbs',

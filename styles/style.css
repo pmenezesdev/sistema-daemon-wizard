@@ -236,9 +236,6 @@
    4. Estilos Específicos por Etapa
  ========================================================================== */
 
-/* --- Etapa 1: Campanha --- */
-.campaign-details { margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 4px; }
-
 /* --- Etapa 3: Atributos --- */
 .attributes-grid { 
     display: grid; 
