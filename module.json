@@ -2,7 +2,7 @@
   "id": "sistema-daemon-wizard",
   "title": "Sistema Daemon - Assistente de Criação",
   "description": "Um assistente passo a passo para guiar na criação de personagens para o Sistema Daemon.",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "authors": [
     {
       "name": "Mestre Arboreal",
@@ -38,5 +38,5 @@
   ],
   "url": "",
   "manifest": "https://raw.githubusercontent.com/pmenezesdev/sistema-daemon-wizard/refs/heads/main/module.json",
-  "download": "https://github.com/pmenezesdev/sistema-daemon-wizard/archive/refs/tags/v0.1.0.zip"
+  "download": "https://github.com/pmenezesdev/sistema-daemon-wizard/archive/refs/tags/v0.1.1.zip"
 }
