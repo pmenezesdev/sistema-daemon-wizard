@@ -21,8 +21,9 @@
             <hr>
             <h4>Pontos Iniciais:</h4>
             <ul>
-                <li><strong>Atributos:</strong> {{selectedScenario.points.attributes}} pontos</li>
-                <li><strong>Aprimoramentos:</strong> {{selectedScenario.points.aprimoramentos}} pontos</li>
+                <li><strong>{{localize "DAEMON_WIZARD.Steps.Attributes"}}:</strong> {{configPoints.attributes}} pontos</li>
+                <li><strong>{{localize "DAEMON_WIZARD.Aprimoramentos.Vantagens"}}:</strong> {{configPoints.aprimoramentosPositivos}} pontos</li>
+                <li><strong>{{localize "DAEMON_WIZARD.Aprimoramentos.Desvantagens"}}:</strong> {{configPoints.aprimoramentosNegativos}} pontos</li>
             </ul>
         {{else}}
             <p><i>Selecione uma campanha para ver os detalhes.</i></p>
